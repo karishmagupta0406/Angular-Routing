@@ -6,6 +6,7 @@ import { MessageService } from '../messages/message.service';
 import { IProduct } from './product';
 import { ProductService } from './product.service';
 
+
 @Component({
     templateUrl: './app/products/product-edit.component.html',
     styleUrls: ['./app/products/product-edit.component.css']
@@ -22,22 +23,13 @@ export class ProductEditComponent implements OnInit{
                 private router: Router) { }
     
     ngOnInit(): void{
-        this.route.params.subscribe(
-            params =>{
-                let id = +params['id'];
-                this.getProduct(id);
-            }
-        )
+        this.onProductRetrieved(this.route.snapshot.data['product']);
+        this.route.data.subscribe(data =>{
+            this.onProductRetrieved(data['product']);
+        })
 
     }
 
-    getProduct(id: number): void {
-        this.productService.getProduct(id)
-            .subscribe(
-                (product: IProduct) => this.onProductRetrieved(product),
-                (error: any) => this.errorMessage = <any>error
-            );
-    }
 
     onProductRetrieved(product: IProduct): void {
         this.product = product;
