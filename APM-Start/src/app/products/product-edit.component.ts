@@ -16,6 +16,7 @@ export class ProductEditComponent implements OnInit{
     errorMessage: string;
 
     product: IProduct;
+    private dataIsValid: {[key: string]: boolean };
 
     constructor(private productService: ProductService,
                 private messageService: MessageService,
@@ -74,5 +75,10 @@ export class ProductEditComponent implements OnInit{
         }
 
         this.router.navigate(['/products']);
+    }
+
+    validate(): void{
+        this.dataIsValid = {};
+        
     }
 }
