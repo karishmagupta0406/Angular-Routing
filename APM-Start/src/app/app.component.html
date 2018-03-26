@@ -20,7 +20,10 @@
                     <a>Welcome {{ authService.currentUser.userName }}</a>
                 </li>
                 <li>
-                    <a [routerLink]="[{outlets:{popup: ['messages'] }}]">Show Messages</a>
+                    <a (click)="displayMessages()" *ngIf="!messageService.isDisplayed">Show Messages</a>
+                </li>
+                <li *ngIf="messageService.isDisplayed">
+                    <a (click)="hideMessages()">Hide Messages</a>
                 </li>
                 <li *ngIf="!authService.isLoggedIn()">
                     <a [routerLink]="['/login']">Log In</a>
